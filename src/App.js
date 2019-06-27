@@ -6,7 +6,7 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { text: 'saya adalah useless placeholder' };
+    this.state = { text: 'I am a useless placeholder' };
   }
 
   render() {
