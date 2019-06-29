@@ -31,7 +31,7 @@ class App extends Component {
                 />
                 <Button
                     onPress={() => console.log(this.state.text)}
-                    title="submit To Me and only me only me"
+                    title="submit box of purple color"
                     color="#841584"
                     accessibilityLabel="Learn more about this purple button"
                 />
