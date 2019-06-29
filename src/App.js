@@ -11,7 +11,17 @@ class App extends Component {
 
   render() {
     return (
+
       <View style={styles.root}>
+        <View style={styles.container}>
+          <View style={styles.hero} />
+        </View>
+        <View style={styles.container}>
+          <View style={styles.villain} />
+          <View style={styles.villain} />
+          <View style={styles.villain} />
+        </View>
+
         <Text>Battle math hello</Text>
         <TextInput
           style={{ height: 40, width: 250, borderColor: 'gray', borderWidth: 1, }}
@@ -32,8 +42,23 @@ class App extends Component {
 
 const styles = StyleSheet.create({
   root: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
+    flex: 1,
+    alignItems: 'center',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
+  },
+  hero: {
+    height: 40,
+    width: 40,
+    backgroundColor: 'blue'
+  },
+  villain: {
+    height: 40,
+    width: 40,
+    backgroundColor: 'red'
+  },
 });
 export default App;
