@@ -25,12 +25,14 @@ class App extends Component {
                     </View>
                 </View>
                 <View style={styles.mathContainer}>
-                    <Text style={styles.mathText}>2+2</Text>
+                    <View style={styles.mathRow}>
+                    <Text style={styles.mathText}>2+2=</Text>
                     <TextInput
                         style={{ height: 40, width: 250, borderColor: 'gray', borderWidth: 1, }}
                         onChangeText={(text) => this.setState({ text })}
                         value={this.state.text}
                     />
+                    </View>
                     <Button
                         onPress={() => console.log(this.state.text)}
                         title="submit box of purple color"
@@ -80,7 +82,10 @@ const styles = StyleSheet.create({
         paddingVertical: 16
     },
     mathText: {
-        fontSize: 40
+        fontSize: 20
+    },
+    mathRow :{
+        flexDirection: 'row'
     }
 
 });
