@@ -13,6 +13,7 @@ class App extends Component {
         return (
 
             <View style={styles.root}>
+                <Text >Battle math hello</Text>
                 <View style={styles.battlefield}>
                     <View style={styles.container}>
                         <View style={styles.hero} />
@@ -23,18 +24,20 @@ class App extends Component {
                         <View style={styles.villain} />
                     </View>
                 </View>
-                <Text>Battle math hello</Text>
-                <TextInput
-                    style={{ height: 40, width: 250, borderColor: 'gray', borderWidth: 1, }}
-                    onChangeText={(text) => this.setState({ text })}
-                    value={this.state.text}
-                />
-                <Button
-                    onPress={() => console.log(this.state.text)}
-                    title="submit box of purple color"
-                    color="#841584"
-                    accessibilityLabel="Learn more about this purple button"
-                />
+                <View style={styles.mathContainer}>
+                    <Text style={styles.mathText}>2+2</Text>
+                    <TextInput
+                        style={{ height: 40, width: 250, borderColor: 'gray', borderWidth: 1, }}
+                        onChangeText={(text) => this.setState({ text })}
+                        value={this.state.text}
+                    />
+                    <Button
+                        onPress={() => console.log(this.state.text)}
+                        title="submit box of purple color"
+                        color="#841584"
+                        accessibilityLabel="Learn more about this purple button"
+                    />
+                </View>
             </View>
 
         );
@@ -53,17 +56,32 @@ const styles = StyleSheet.create({
         right: 0
     },
     hero: {
-        height: 40,
-        width: 40,
+        height: 80,
+        width: 80,
         backgroundColor: 'blue'
     },
     villain: {
-        height: 40,
-        width: 40,
+        height: 80,
+        width: 80,
         backgroundColor: 'red'
     },
     battlefield: {
-        flexDirection: 'row'
+        flex: 1,
+        flexDirection: 'row',
+        width: '100%'
+    },
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-evenly'
+
+    },
+    mathContainer: {
+        paddingVertical: 16
+    },
+    mathText: {
+        fontSize: 40
     }
+
 });
 export default App;
