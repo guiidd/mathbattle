@@ -6,7 +6,37 @@ class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { text: 'I am a useless placeholder' };
+        this.state = {
+            text: 'I am a useless placeholder',
+            answer: '',
+            numberOfEnemies: 3
+        };
+    }
+
+    checkAnswer = () => {
+        let correct = parseInt(this.state.answer,10) === 2+2
+        console.log(`3 state.answer is ${this.state.answer}`)
+        console.log(`1 is ${correct}`);
+        if (correct) {
+            this.removeEnemy()
+        } else {
+            this.addEnemy()
+        }
+        this.newProblem()
+    }
+
+    removeEnemy = () => {
+        console.log('minus')
+        this.setState({ numberOfEnemies: this.state.numberOfEnemies - 1 })
+    }
+
+    addEnemy = () => {
+        console.log('plus')
+        this.setState({ numberOfEnemies: this.state.numberOfEnemies + 1 })
+    }
+
+    newProblem = () => {
+        console.log('new problem created') 
     }
 
     render() {
@@ -26,16 +56,20 @@ class App extends Component {
                 </View>
                 <View style={styles.mathContainer}>
                     <View style={styles.mathRow}>
-                    <Text style={styles.mathText}>2+2=</Text>
-                    <TextInput
-                        style={{ height: 40, width: 250, borderColor: 'gray', borderWidth: 1, }}
-                        onChangeText={(text) => this.setState({ text })}
-                        value={this.state.text}
-                    />
+                        <Text style={styles.mathText}>2+2=</Text>
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={(answer) => this.setState({ answer })}
+                            value={this.state.answer}
+                        />
                     </View>
                     <Button
-                        onPress={() => console.log(this.state.text)}
-                        title="submit box of purple color"
+                        onPress={() => {
+                                        console.log(`2 state.answer is ${this.state.answer}`); 
+                                        this.checkAnswer()
+                                        }
+                                    }
+                        title="purple color"
                         color="#841584"
                         accessibilityLabel="Learn more about this purple button"
                     />
@@ -84,8 +118,15 @@ const styles = StyleSheet.create({
     mathText: {
         fontSize: 20
     },
-    mathRow :{
-        flexDirection: 'row'
+    mathRow: {
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+    input: {
+        height: 40,
+        width: 80,
+        borderColor: 'gray',
+        borderWidth: 1
     }
 
 });
