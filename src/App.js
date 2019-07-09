@@ -9,14 +9,13 @@ class App extends Component {
         this.state = {
             text: 'I am a useless placeholder',
             answer: '',
-            numberOfEnemies: 3
+            numberOfEnemies: 8
         };
     }
 
     checkAnswer = () => {
-        let correct = parseInt(this.state.answer,10) === 2+2
-        console.log(`3 state.answer is ${this.state.answer}`)
-        console.log(`1 is ${correct}`);
+        let correct = parseInt(this.state.answer, 10) === 2 + 2
+
         if (correct) {
             this.removeEnemy()
         } else {
@@ -26,17 +25,17 @@ class App extends Component {
     }
 
     removeEnemy = () => {
-        console.log('minus')
+
         this.setState({ numberOfEnemies: this.state.numberOfEnemies - 1 })
     }
 
     addEnemy = () => {
-        console.log('plus')
+
         this.setState({ numberOfEnemies: this.state.numberOfEnemies + 1 })
     }
 
     newProblem = () => {
-        console.log('new problem created') 
+        console.log('new problem created')
     }
 
     render() {
@@ -49,9 +48,13 @@ class App extends Component {
                         <View style={styles.hero} />
                     </View>
                     <View style={styles.container}>
+                        {[...Array(this.state.numberOfEnemies)].map(
+                            (x,i) => <View key={i} style={styles.villain} />
+                        )}
+                        {/*
                         <View style={styles.villain} />
                         <View style={styles.villain} />
-                        <View style={styles.villain} />
+                        */}
                     </View>
                 </View>
                 <View style={styles.mathContainer}>
@@ -65,10 +68,10 @@ class App extends Component {
                     </View>
                     <Button
                         onPress={() => {
-                                        console.log(`2 state.answer is ${this.state.answer}`); 
-                                        this.checkAnswer()
-                                        }
-                                    }
+                            console.log(`2 state.answer is ${this.state.answer}`);
+                            this.checkAnswer()
+                        }
+                        }
                         title="purple color"
                         color="#841584"
                         accessibilityLabel="Learn more about this purple button"
