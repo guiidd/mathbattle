@@ -9,7 +9,7 @@ class App extends Component {
         this.state = {
             text: 'I am a useless placeholder',
             answer: '',
-            numberOfEnemies: 8
+            numberOfEnemies: 3
         };
     }
 
@@ -30,8 +30,10 @@ class App extends Component {
     }
 
     addEnemy = () => {
-
-        this.setState({ numberOfEnemies: this.state.numberOfEnemies + 1 })
+        if (this.state.numberOfEnemies<=8){
+            this.setState({ numberOfEnemies: this.state.numberOfEnemies + 1 })
+        }
+        
     }
 
     newProblem = () => {
