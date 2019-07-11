@@ -9,15 +9,27 @@ class App extends Component {
         this.state = {
             text: 'I am a useless placeholder',
             answer: '',
-            numberOfEnemies: 3
+            numberOfEnemies: 3,
+            value1: 1,
+            value2: 1,
+            won: false
         };
     }
 
+    randomNum = (max) => {
+        return Math.floor(Math.random() * Math.floor(max))
+    }
+
     checkAnswer = () => {
-        let correct = parseInt(this.state.answer, 10) === 2 + 2
+        let correct = parseInt(this.state.answer, 10) === this.state.value1+this.state.value2
 
         if (correct) {
             this.removeEnemy()
+            console.log(`correct enemies is ${this.state.numberOfEnemies}`)
+            if(this.state.numberOfEnemies===1){
+                console.log(`correct enemies is ${this.state.numberOfEnemies}`)
+                this.youWon()
+            }
         } else {
             this.addEnemy()
         }
@@ -38,6 +50,20 @@ class App extends Component {
 
     newProblem = () => {
         console.log('new problem created')
+        this.setState({
+            value1: this.randomNum(10),
+            value2: this.randomNum(10)
+        })
+    }
+
+    youWon = () => {
+        this.setState({
+            won:true
+        })
+    }
+
+    componentDidMount =() =>{
+        this.newProblem()
     }
 
     render() {
@@ -59,9 +85,10 @@ class App extends Component {
                         */}
                     </View>
                 </View>
+                {this.state.won ? <Text>u waon VVICTORY</Text>:
                 <View style={styles.mathContainer}>
                     <View style={styles.mathRow}>
-                        <Text style={styles.mathText}>2+2=</Text>
+                        <Text style={styles.mathText}>{this.state.value1}+{this.state.value2}=</Text>
                         <TextInput
                             style={styles.input}
                             onChangeText={(answer) => this.setState({ answer })}
@@ -79,6 +106,7 @@ class App extends Component {
                         accessibilityLabel="Learn more about this purple button"
                     />
                 </View>
+                }
             </View>
 
         );
