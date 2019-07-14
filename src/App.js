@@ -25,11 +25,7 @@ class App extends Component {
 
         if (correct) {
             this.removeEnemy()
-            console.log(`correct enemies is ${this.state.numberOfEnemies}`)
-            if(this.state.numberOfEnemies===1){
-                console.log(`correct enemies is ${this.state.numberOfEnemies}`)
-                this.youWon()
-            }
+            
         } else {
             this.addEnemy()
         }
@@ -37,8 +33,23 @@ class App extends Component {
     }
 
     removeEnemy = () => {
-
-        this.setState({ numberOfEnemies: this.state.numberOfEnemies - 1 })
+        this.setState(
+            prev => ({numberOfEnemies: prev.numberOfEnemies - 1}),
+            () => {
+               if (this.state.numberOfEnemies === 0) {
+                   this.youWon()
+               } 
+            }
+        )
+        //this.setState({ numberOfEnemies: this.state.numberOfEnemies - 1 })
+        //console.log(`correct enemies is ${this.state.numberOfEnemies}`)
+        //this.setState(prevState => {
+            //if(this.state.numberOfEnemies===1){
+                //console.log(`correct enemies is ${this.state.numberOfEnemies}`)
+                //this.youWon()
+            //}
+        //})
+            
     }
 
     addEnemy = () => {
@@ -62,7 +73,7 @@ class App extends Component {
         })
     }
 
-    componentDidMount =() =>{
+    componentDidMount = () =>{
         this.newProblem()
     }
 
