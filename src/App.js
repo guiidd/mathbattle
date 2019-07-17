@@ -21,11 +21,25 @@ class App extends Component {
     }
 
     checkAnswer = () => {
-        let correct = parseInt(this.state.answer, 10) === this.state.value1+this.state.value2
+        //var expr = 'Papayas';
+        //switch (expr) {
+        //  case 'Oranges':
+        //    console.log('Oranges are $0.59 a pound.');
+        //    break;
+        //case 'Mangoes':
+        //case 'Papayas':
+        //  console.log('Mangoes and papayas are $2.79 a pound.');
+        // expected output: "Mangoes and papayas are $2.79 a pound."
+        //break;
+        //default:
+        //  console.log('Sorry, we are out of ' + expr + '.');
+        //}
+
+        let correct = parseInt(this.state.answer, 10) === this.state.value1 + this.state.value2
 
         if (correct) {
             this.removeEnemy()
-            
+
         } else {
             this.addEnemy()
         }
@@ -34,29 +48,29 @@ class App extends Component {
 
     removeEnemy = () => {
         this.setState(
-            prev => ({numberOfEnemies: prev.numberOfEnemies - 1}),
+            prev => ({ numberOfEnemies: prev.numberOfEnemies - 1 }),
             () => {
-               if (this.state.numberOfEnemies === 0) {
-                   this.youWon()
-               } 
+                if (this.state.numberOfEnemies === 0) {
+                    this.youWon()
+                }
             }
         )
         //this.setState({ numberOfEnemies: this.state.numberOfEnemies - 1 })
         //console.log(`correct enemies is ${this.state.numberOfEnemies}`)
         //this.setState(prevState => {
-            //if(this.state.numberOfEnemies===1){
-                //console.log(`correct enemies is ${this.state.numberOfEnemies}`)
-                //this.youWon()
-            //}
+        //if(this.state.numberOfEnemies===1){
+        //console.log(`correct enemies is ${this.state.numberOfEnemies}`)
+        //this.youWon()
+        //}
         //})
-            
+
     }
 
     addEnemy = () => {
-        if (this.state.numberOfEnemies<=8){
+        if (this.state.numberOfEnemies <= 8) {
             this.setState({ numberOfEnemies: this.state.numberOfEnemies + 1 })
         }
-        
+
     }
 
     newProblem = () => {
@@ -69,11 +83,11 @@ class App extends Component {
 
     youWon = () => {
         this.setState({
-            won:true
+            won: true
         })
     }
 
-    componentDidMount = () =>{
+    componentDidMount = () => {
         this.newProblem()
     }
 
@@ -88,7 +102,7 @@ class App extends Component {
                     </View>
                     <View style={styles.container}>
                         {[...Array(this.state.numberOfEnemies)].map(
-                            (x,i) => <View key={i} style={styles.villain} />
+                            (x, i) => <View key={i} style={styles.villain} />
                         )}
                         {/*
                         <View style={styles.villain} />
@@ -96,27 +110,27 @@ class App extends Component {
                         */}
                     </View>
                 </View>
-                {this.state.won ? <Text>u waon VVICTORY</Text>:
-                <View style={styles.mathContainer}>
-                    <View style={styles.mathRow}>
-                        <Text style={styles.mathText}>{this.state.value1}+{this.state.value2}=</Text>
-                        <TextInput
-                            style={styles.input}
-                            onChangeText={(answer) => this.setState({ answer })}
-                            value={this.state.answer}
+                {this.state.won ? <Text>u waon VVICTORY</Text> :
+                    <View style={styles.mathContainer}>
+                        <View style={styles.mathRow}>
+                            <Text style={styles.mathText}>{this.state.value1}+{this.state.value2}=</Text>
+                            <TextInput
+                                style={styles.input}
+                                onChangeText={(answer) => this.setState({ answer })}
+                                value={this.state.answer}
+                            />
+                        </View>
+                        <Button
+                            onPress={() => {
+                                console.log(`2 state.answer is ${this.state.answer}`);
+                                this.checkAnswer()
+                            }
+                            }
+                            title="purple color"
+                            color="#841584"
+                            accessibilityLabel="Learn more about this purple button"
                         />
                     </View>
-                    <Button
-                        onPress={() => {
-                            console.log(`2 state.answer is ${this.state.answer}`);
-                            this.checkAnswer()
-                        }
-                        }
-                        title="purple color"
-                        color="#841584"
-                        accessibilityLabel="Learn more about this purple button"
-                    />
-                </View>
                 }
             </View>
 
