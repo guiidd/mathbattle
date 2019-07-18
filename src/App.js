@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, Image, StyleSheet, Text, View, TextInput } from "react-native";
 import './App.css';
+import { isBreakStatement } from "@babel/types";
 
 class App extends Component {
 
@@ -12,7 +13,9 @@ class App extends Component {
             numberOfEnemies: 3,
             value1: 1,
             value2: 1,
-            won: false
+            won: false,
+            operator: '+',
+            mode: 'addition'
         };
     }
 
@@ -20,7 +23,32 @@ class App extends Component {
         return Math.floor(Math.random() * Math.floor(max))
     }
 
-    checkAnswer = () => {
+    checkAnswer = (operator) => {
+
+        let correct
+        switch (operator) {
+            case 'addition':
+                console.log(`from checkAnswer is ${operator}`)
+                console.log(parseInt(this.state.answer, 10),this.state.value1,this.state.value2,parseInt(this.state.answer, 10) === this.state.value1 + this.state.value2)
+                correct = parseInt(this.state.answer, 10) === this.state.value1 + this.state.value2
+                console.log(`correct is ${correct}`)
+                this.setState({ operator: '+' })
+                break;
+            case 'subtraction':
+                correct = parseInt(this.state.answer, 10) === this.state.value1 - this.state.value2
+                this.setState({ operator: '-' })
+                break;
+            case 'multiplication':
+                correct = parseInt(this.state.answer, 10) === this.state.value1 * this.state.value2
+                this.setState({ operator: '*' })
+                break;
+            case 'division':
+                correct = parseInt(this.state.answer, 10) === this.state.value1 / this.state.value2
+                this.setState({ operator: '/' })
+                break;
+            default:
+                console.log('sorry not an option')
+        }
         //var expr = 'Papayas';
         //switch (expr) {
         //  case 'Oranges':
@@ -35,7 +63,7 @@ class App extends Component {
         //  console.log('Sorry, we are out of ' + expr + '.');
         //}
 
-        let correct = parseInt(this.state.answer, 10) === this.state.value1 + this.state.value2
+        //let correct = parseInt(this.state.answer, 10) === this.state.value1 + this.state.value2
 
         if (correct) {
             this.removeEnemy()
@@ -91,6 +119,11 @@ class App extends Component {
         this.newProblem()
     }
 
+    handleSubmit = () => {
+        console.log(`from handle submit ${this.state.mode}`)
+        this.checkAnswer(this.state.mode)
+    }
+
     render() {
         return (
 
@@ -113,7 +146,7 @@ class App extends Component {
                 {this.state.won ? <Text>u waon VVICTORY</Text> :
                     <View style={styles.mathContainer}>
                         <View style={styles.mathRow}>
-                            <Text style={styles.mathText}>{this.state.value1}+{this.state.value2}=</Text>
+                            <Text style={styles.mathText}>{this.state.value1}{this.state.operator}{this.state.value2}=</Text>
                             <TextInput
                                 style={styles.input}
                                 onChangeText={(answer) => this.setState({ answer })}
@@ -123,7 +156,7 @@ class App extends Component {
                         <Button
                             onPress={() => {
                                 console.log(`2 state.answer is ${this.state.answer}`);
-                                this.checkAnswer()
+                                this.handleSubmit()
                             }
                             }
                             title="purple color"
