@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Image, StyleSheet, Text, View, TextInput } from "react-native";
+import { Button, Image, StyleSheet, Text, View, TextInput, Picker } from "react-native";
 import './App.css';
 import { isBreakStatement } from "@babel/types";
 
@@ -28,13 +28,14 @@ class App extends Component {
         let correct
         switch (operator) {
             case 'addition':
-                console.log(`from checkAnswer is ${operator}`)
-                console.log(parseInt(this.state.answer, 10),this.state.value1,this.state.value2,parseInt(this.state.answer, 10) === this.state.value1 + this.state.value2)
+                //console.log(`from checkAnswer is ${operator}`)
+                //hate spelling errors 
+                //console.log(parseInt(this.state.answer, 10),this.state.value1,this.state.value2,parseInt(this.state.answer, 10) === this.state.value1 + this.state.value2)
                 correct = parseInt(this.state.answer, 10) === this.state.value1 + this.state.value2
-                console.log(`correct is ${correct}`)
+                //console.log(`correct is ${correct}`)
                 this.setState({ operator: '+' })
                 break;
-            case 'subtraction':
+            case 'substraction':
                 correct = parseInt(this.state.answer, 10) === this.state.value1 - this.state.value2
                 this.setState({ operator: '-' })
                 break;
@@ -124,10 +125,44 @@ class App extends Component {
         this.checkAnswer(this.state.mode)
     }
 
+    handleModePicker = val => {
+        switch (val) {
+            case 'addition':
+                this.setState({ mode: val, operator: '+' })
+                break;
+            case 'substraction':
+                
+                this.setState({  mode: val, operator: '-' })
+                break;
+            case 'multiplication':
+                
+                this.setState({  mode: val, operator: '*' })
+                break;
+            case 'division':
+                
+                this.setState({  mode: val, operator: '/' })
+                break;
+            default:
+                console.log('sorry not an option')
+        }
+    }
+
     render() {
         return (
 
             <View style={styles.root}>
+                <Picker
+                    selectedValue={this.state.language}
+                    style={{ height: 50, width: 100 }}
+                    onValueChange={(itemValue, itemIndex) =>
+                        //this.setState({ mode: itemValue.mode, operator: itemValue.operator })
+                        this.handleModePicker(itemValue)
+                    }>
+                    <Picker.Item label="addition" value={"addition"} />
+                    <Picker.Item label="substraction" value={"substraction"} />
+                    <Picker.Item label="multiplication" value={"multiplication"} />
+                    <Picker.Item label="division" value={"division"} />
+                </Picker>
                 <Text >Battle math hello</Text>
                 <View style={styles.battlefield}>
                     <View style={styles.container}>
