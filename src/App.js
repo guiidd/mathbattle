@@ -149,11 +149,12 @@ class App extends Component {
     }
 
     render() {
+        const { mode, answer, numberOfEnemies, value1, value2, won, operator } = this.state
         return (
 
             <View style={styles.root}>
                 <Picker
-                    selectedValue={this.state.language}
+                    selectedValue={mode}
                     style={{ height: 50, width: 100 }}
                     onValueChange={(itemValue, itemIndex) =>
                         //this.setState({ mode: itemValue.mode, operator: itemValue.operator })
@@ -170,7 +171,7 @@ class App extends Component {
                         <View style={styles.hero} />
                     </View>
                     <View style={styles.container}>
-                        {[...Array(this.state.numberOfEnemies)].map(
+                        {[...Array(numberOfEnemies)].map(
                             (x, i) => <View key={i} style={styles.villain} />
                         )}
                         {/*
@@ -179,19 +180,19 @@ class App extends Component {
                         */}
                     </View>
                 </View>
-                {this.state.won ? <Text>u waon VVICTORY</Text> :
+                {won ? <Text>u waon VVICTORY</Text> :
                     <View style={styles.mathContainer}>
                         <View style={styles.mathRow}>
-                            <Text style={styles.mathText}>{this.state.value1}{this.state.operator}{this.state.value2}=</Text>
+                            <Text style={styles.mathText}>{value1}{operator}{value2}=</Text>
                             <TextInput
                                 style={styles.input}
                                 onChangeText={(answer) => this.setState({ answer })}
-                                value={this.state.answer}
+                                value={answer}
                             />
                         </View>
                         <Button
                             onPress={() => {
-                                console.log(`2 state.answer is ${this.state.answer}`);
+                                console.log(`2 state.answer is ${answer}`);
                                 this.handleSubmit()
                             }
                             }
