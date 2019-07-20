@@ -44,6 +44,7 @@ class App extends Component {
                 this.setState({ operator: '*' })
                 break;
             case 'division':
+                //division error when divided by 0, need to limit decimal point
                 correct = parseInt(this.state.answer, 10) === this.state.value1 / this.state.value2
                 this.setState({ operator: '/' })
                 break;
@@ -131,16 +132,16 @@ class App extends Component {
                 this.setState({ mode: val, operator: '+' })
                 break;
             case 'substraction':
-                
-                this.setState({  mode: val, operator: '-' })
+
+                this.setState({ mode: val, operator: '-' })
                 break;
             case 'multiplication':
-                
-                this.setState({  mode: val, operator: '*' })
+
+                this.setState({ mode: val, operator: '*' })
                 break;
             case 'division':
-                
-                this.setState({  mode: val, operator: '/' })
+
+                this.setState({ mode: val, operator: '/' })
                 break;
             default:
                 console.log('sorry not an option')
