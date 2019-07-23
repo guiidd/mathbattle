@@ -150,12 +150,13 @@ class App extends Component {
 
     render() {
         const { mode, answer, numberOfEnemies, value1, value2, won, operator } = this.state
+        const activeTheme = themes[mode]
         return (
 
-            <View style={styles.root}>
+            <View style={[styles.root, { backgroundColor: activeTheme.backgroundColor }]}>
                 <Picker
                     selectedValue={mode}
-                    style={{ height: 50, width: 100 }}
+                    style={styles.picker}
                     onValueChange={(itemValue, itemIndex) =>
                         //this.setState({ mode: itemValue.mode, operator: itemValue.operator })
                         this.handleModePicker(itemValue)
@@ -165,14 +166,14 @@ class App extends Component {
                     <Picker.Item label="multiplication" value={"multiplication"} />
                     <Picker.Item label="division" value={"division"} />
                 </Picker>
-                <Text >Battle math hello</Text>
+                <Text style={styles.title}>Battle math hello</Text>
                 <View style={styles.battlefield}>
                     <View style={styles.container}>
-                        <View style={styles.hero} />
+                        <View style={[styles.hero,styles.character]} />
                     </View>
                     <View style={styles.container}>
                         {[...Array(numberOfEnemies)].map(
-                            (x, i) => <View key={i} style={styles.villain} />
+                            (x, i) => <View key={i} style={[styles.villain,styles.character]} />
                         )}
                         {/*
                         <View style={styles.villain} />
@@ -219,14 +220,18 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0
     },
+    title: {
+        fontSize: 32,
+        fontFamily: `'Comic-Sans MS', cursive, sans-serif`
+    },
+    character: {
+        height: 60,
+        width: 60
+    },
     hero: {
-        height: 80,
-        width: 80,
         backgroundColor: 'blue'
     },
     villain: {
-        height: 80,
-        width: 80,
         backgroundColor: 'red'
     },
     battlefield: {
@@ -255,7 +260,26 @@ const styles = StyleSheet.create({
         width: 80,
         borderColor: 'gray',
         borderWidth: 1
+    },
+    picker: {
+        height: 60,
+        width: 150
     }
 
 });
+
+const themes = {
+    addition: {
+        backgroundColor: 'green'
+    },
+    substraction: {
+        backgroundColor: 'maroon'
+    },
+    multiplication: {
+        backgroundColor: 'yellow'
+    },
+    division: {
+        backgroundColor: 'orange'
+    }
+}
 export default App;
